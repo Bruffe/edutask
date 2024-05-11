@@ -97,16 +97,8 @@ def test_dao_create_not_unique_prop(dao):
         "lastName": "Lastname",
         "email": "firstname.lastname@test.com"
     }
+
     result1 = dao.create(data_valid1)
-
-    # unique_property = False
-    data_valid2 = {
-        "firstName": "Firstname",
-        "lastName": "Lastname",
-        "email": "firstname.lastname@test.com"
-    }
-
-    result2 = dao.create(data_valid2)
 
     # assert expected outcome
     assert isinstance(result1, dict)
@@ -115,7 +107,7 @@ def test_dao_create_not_unique_prop(dao):
     assert "email" in result1
     assert "_id" in result1
     with pytest.raises(WriteError):
-        dao.create(result2)
+        dao.create(data_valid1)
 
 @pytest.mark.integration
 def test_dao_create_not_BSON(dao):
